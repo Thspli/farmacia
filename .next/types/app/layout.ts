@@ -1,4 +1,4 @@
-// File: C:\Temp\Farmácia Management System\src\app\layout.tsx
+// File: C:\Temp\nicolas\farmacia\src\app\layout.tsx
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
