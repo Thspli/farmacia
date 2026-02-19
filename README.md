@@ -76,3 +76,4 @@ npm run build
 - Sem necessidade de configuração
 
 **Sistema 100% funcional sem backend! 🎉**
+# farmacia
