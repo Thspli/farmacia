@@ -12,7 +12,8 @@ import {
   BarChart3,
   LogOut,
   Menu,
-  X
+  X,
+  Users
 } from 'lucide-react';
 import MedicamentosView from './views/MedicamentosView';
 import ReceitasView from './views/ReceitasView';
@@ -21,6 +22,7 @@ import UbsView from './views/UbsView';
 import FrenteCaixaView from './views/FrenteCaixaView';
 import RelatoriosView from './views/RelatoriosView';
 import HomeView from './views/HomeView';
+import UsuariosView from './views/UsuariosView';
 
 interface User {
   id: string;
@@ -46,6 +48,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
     { id: 'medicos', label: 'Médicos', icon: UserCog, roles: ['admin', 'gerente'] },
     { id: 'ubs', label: 'UBS', icon: Building2, roles: ['admin', 'gerente'] },
     { id: 'relatorios', label: 'Relatórios', icon: BarChart3, roles: ['admin', 'gerente'] },
+    { id: 'usuarios', label: 'Usuários', icon: Users, roles: ['admin'] },
   ];
 
   const visibleMenuItems = menuItems.filter(item => 
@@ -68,6 +71,8 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
         return <FrenteCaixaView user={user} />;
       case 'relatorios':
         return <RelatoriosView user={user} />;
+      case 'usuarios':
+        return <UsuariosView currentUser={user} />;
       default:
         return <HomeView user={user} />;
     }
@@ -122,6 +127,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
             {visibleMenuItems.map((item) => {
               const Icon = item.icon;
               const isActive = currentView === item.id;
+              const isUsersItem = item.id === 'usuarios';
               return (
                 <button
                   key={item.id}
@@ -133,12 +139,21 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
                   }}
                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                     isActive
-                      ? 'bg-blue-50 text-blue-700 font-medium'
-                      : 'text-gray-700 hover:bg-gray-50'
+                      ? isUsersItem
+                        ? 'bg-indigo-50 text-indigo-700 font-medium'
+                        : 'bg-blue-50 text-blue-700 font-medium'
+                      : isUsersItem
+                        ? 'text-gray-700 hover:bg-indigo-50 hover:text-indigo-700'
+                        : 'text-gray-700 hover:bg-gray-50'
                   }`}
                 >
                   <Icon className="h-5 w-5" />
                   <span>{item.label}</span>
+                  {isUsersItem && (
+                    <span className="ml-auto text-xs bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded font-medium">
+                      Admin
+                    </span>
+                  )}
                 </button>
               );
             })}
