@@ -64,13 +64,13 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
       case 'receitas':
         return <ReceitasView user={user} />;
       case 'medicos':
-        return <MedicosView user={user} />;
+        return <MedicosView />;
       case 'ubs':
-        return <UbsView user={user} />;
+        return <UbsView />;
       case 'frente-caixa':
         return <FrenteCaixaView user={user} />;
       case 'relatorios':
-        return <RelatoriosView user={user} />;
+        return <RelatoriosView />;
       case 'usuarios':
         return <UsuariosView currentUser={user} />;
       default:

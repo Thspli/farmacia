@@ -10,11 +10,7 @@ import { Badge } from '../ui/badge';
 import { BarChart3, TrendingUp, Users, Building2, Package } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-interface User {
-  userType: string;
-}
-
-export default function RelatoriosView({ user }: User) {
+export default function RelatoriosView() {
   const [loading, setLoading] = useState(true);
   const [medicamentosMaisVendidos, setMedicamentosMaisVendidos] = useState<any[]>([]);
   const [medicosMaisPrescreveram, setMedicosMaisPrescreveram] = useState<any[]>([]);
@@ -181,33 +177,24 @@ export default function RelatoriosView({ user }: User) {
                     </Table>
                   </div>
 
-                  {medicamentosMaisVendidos.length > 0 && (
-                    <div className="h-80">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={medicamentosMaisVendidos.slice(0, 10)} key="medicamentos-chart">
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis 
-                            dataKey="medicamentoNome" 
-                            angle={-45}
-                            textAnchor="end"
-                            height={100}
-                            fontSize={12}
-                          />
-                          <YAxis />
-                          <Tooltip />
-                          <Legend />
-                          <Bar dataKey="quantidadeTotal" name="Quantidade Vendida" fill="#3b82f6" />
-                        </BarChart>
-                      </ResponsiveContainer>
-                    </div>
-                  )}
+                  <div className="h-80">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart data={medicamentosMaisVendidos.slice(0, 10)}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="medicamentoNome" angle={-45} textAnchor="end" height={100} fontSize={12} />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Bar dataKey="quantidadeTotal" name="Quantidade Vendida" fill="#3b82f6" />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
                 </>
               )}
             </CardContent>
           </Card>
 
-          {/* Medicamentos com Estoque Baixo */}
-          {estatisticasEstoque?.medicamentosEstoqueBaixo && estatisticasEstoque.medicamentosEstoqueBaixo.length > 0 && (
+          {estatisticasEstoque?.medicamentosEstoqueBaixo?.length > 0 && (
             <Card>
               <CardHeader>
                 <CardTitle>Medicamentos com Estoque Baixo ({"<"} 10 unidades)</CardTitle>
@@ -282,13 +269,7 @@ export default function RelatoriosView({ user }: User) {
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={medicosMaisPrescreveram}>
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis 
-                          dataKey="medicoNome" 
-                          angle={-45}
-                          textAnchor="end"
-                          height={100}
-                          fontSize={12}
-                        />
+                        <XAxis dataKey="medicoNome" angle={-45} textAnchor="end" height={100} fontSize={12} />
                         <YAxis />
                         <Tooltip />
                         <Legend />
@@ -342,13 +323,7 @@ export default function RelatoriosView({ user }: User) {
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={atendimentosPorFuncionario}>
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis 
-                          dataKey="funcionarioNome" 
-                          angle={-45}
-                          textAnchor="end"
-                          height={100}
-                          fontSize={12}
-                        />
+                        <XAxis dataKey="funcionarioNome" angle={-45} textAnchor="end" height={100} fontSize={12} />
                         <YAxis />
                         <Tooltip />
                         <Legend />
@@ -404,13 +379,7 @@ export default function RelatoriosView({ user }: User) {
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={ubsMaisPedidos}>
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis 
-                          dataKey="ubsNome" 
-                          angle={-45}
-                          textAnchor="end"
-                          height={100}
-                          fontSize={12}
-                        />
+                        <XAxis dataKey="ubsNome" angle={-45} textAnchor="end" height={100} fontSize={12} />
                         <YAxis />
                         <Tooltip />
                         <Legend />
